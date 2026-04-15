@@ -22,17 +22,16 @@ import re
 parser = argparse.ArgumentParser(description="Textlängenzähler")
 
 parser.add_argument("text")
+parser.add_argument("--details", action='store_true')
 
 args = parser.parse_args()
 
 zeichenlaenge = len(args.text)
 print ("Zeichen:"+str(zeichenlaenge))
+if(args.details):
+    words = args.text.split()
+    print("Wörter:"+str(len(words)))
 
-words = args.text.split()
-print("Wörter:"+str(len(words)))
+    nichtvokale = len(re.sub('(?:a|e|i|o|u|A|E|I|O|U)','', args.text))
 
-nichtvokale = len(re.sub('(?:a|e|i|o|u|A|E|I|O|U)','', args.text))
-
-print ("Vokale:"+str(zeichenlaenge-nichtvokale))
-
-# TODO: "Details" als optionales Argument setzen, nur in diesem Fall werden Wörter und Vokale gezählt
+    print ("Vokale:"+str(zeichenlaenge-nichtvokale))
