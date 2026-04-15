@@ -17,6 +17,7 @@
 # Optional: Erweitern Sie das Skript, um auch die Anzahl der Vokale und Konsonanten zu zählen.
 
 import argparse
+import re
 
 parser = argparse.ArgumentParser(description="Textlängenzähler")
 
@@ -24,10 +25,14 @@ parser.add_argument("text")
 
 args = parser.parse_args()
 
-print ("Zeichen:"+str(len(args.text)))
+zeichenlaenge = len(args.text)
+print ("Zeichen:"+str(zeichenlaenge))
 
 words = args.text.split()
 print("Wörter:"+str(len(words)))
 
-# TODO: Vokale zählen
+nichtvokale = len(re.sub('(?:a|e|i|o|u|A|E|I|O|U)','', args.text))
+
+print ("Vokale:"+str(zeichenlaenge-nichtvokale))
+
 # TODO: "Details" als optionales Argument setzen, nur in diesem Fall werden Wörter und Vokale gezählt
